@@ -5,17 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <!--Bootstrap link-->
-    <link rel = "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel = "stylesheet/txt" href= "./assets/styles/style.css">
+    <link rel = "stylesheet" href= "./assets/styles/style.css">
 </head>
+
 <body>
-    <!--Adding header with bootstrap jumbotron-->
     <header>
-        <div class ="jumbotron text-center text-light bg-dark">
+        <div class="header">
             <h1>Weather Dashboard</h1>
         </div>
     </header>
+
+    <main>
+        <div class = "search">
+            <div class = "nav-block">
+                <h2>Search for a City:</h2>
+                <div class = "search-nav">
+                    <input type = "text" placeholder = "San Diego">
+                </div>
+                <div class = "search-btn">
+                    <button type = "submit">Search</button>
+                </div>
+            </div>
+            <div class= "city-btns">
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+                <button type = "button">City Name</button>
+            </div>
+        </div>
+
+        <div class = "city-weather">
+            <div class = "city-details">
+                <h2>Selected City Name</h2>
+                <ul class = "temp">Temperature</ul>
+                <ul class = "wind">Wind</ul>
+                <ul class = "hum">Humidity</ul>
+                <ul class = "uv">UV Index</ul>
+            </div>
+            <h2>5-Day Forecast</h2>
+            <div class = "five-day">
+                <div id = "date-1">
+                    <h3>00/00/0000</h3>
+                </div>
+                <div id = "date-2">
+                    <h3>00/00/0000</h3>
+                </div>
+                <div id = "date-3">
+                    <h3>00/00/0000</h3>
+                </div>
+                <div id = "date-4">
+                    <h3>00/00/0000</h3>
+                </div>
+                <div id = "date-5">
+                    <h3>00/00/0000</h3>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+   
+
 
     <script src = "./assets/script/script.js"></script>
 </body>
