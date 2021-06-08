@@ -85,28 +85,7 @@ function getWeatherData (city) {
             })
             .then(function (data) {
                 console.log(data);
-
-                function appendWeather () {
-                    var selectedCity = document.querySelector("#selectedCity");
-                    selectedCity.textContent =  city;
-
-                    // var mainIcon = document.querySelector("#mainIcon");
-                    // icon1 = data.current.weather[0].icon
-                    // mainIcon.setAttribute("src", icon); 
-                
-                    var currentTemp = document.querySelector(".temp");
-                    currentTemp.textContent = "Temp: " + data.current.temp + " F";
-                
-                    var currentWind = document.querySelector(".wind");
-                    currentWind.textContent = "Wind: " + data.current.wind_speed + " mph"; //find why undefined
-                
-                    var humidity = document.querySelector(".hum");
-                    humidity.textContent = "Humidity: " + data.current.humidity + " %";
-                
-                    var uvIndex = document.querySelector(".uv"); 
-                    uvIndex.textContent= "UV Index: " + data.current.uvi;
-                };
-                appendWeather();
+                appendWeather(city, data);
             })
            
         })
@@ -117,24 +96,27 @@ function getWeatherData (city) {
    };
 };
 
-// function appendWeather () {
-//     var selectedCity = document.querySelector("#selectedCity");
+function appendWeather (c, d) {
+    var selectedCity = document.querySelector("#selectedCity");
+    selectedCity.textContent =  c;
 
-//     selectedCity.textContent =  city;
+    // var mainIcon = document.querySelector("#mainIcon");
+    // icon1 = data.current.weather[0].icon
+    // mainIcon.setAttribute("src", icon); 
 
-//     var currentTemp = document.querySelector(".temp");
+    var currentTemp = document.querySelector(".temp");
+    currentTemp.textContent = "Temp: " + d.current.temp + " F";
 
-//     currentTemp.textContent = "Temp: " + data.current.temp + "F";
+    var currentWind = document.querySelector(".wind");
+    currentWind.textContent = "Wind: " + d.current.wind_speed + " mph"; //find why undefined
 
-//     var currentWind = document.querySelector(".wind");
-//     currentWind.textContent = "Wind: " + data.current.weather.wind-speed + " mph";
+    var humidity = document.querySelector(".hum");
+    humidity.textContent = "Humidity: " + d.current.humidity + " %";
 
-//     var humidity = document.querySelector(".hum");
-//     humidity.textContent = "Humidity: " + data.current.humidity + " %";
+    var uvIndex = document.querySelector(".uv"); 
+    uvIndex.textContent= "UV Index: " + d.current.uvi;
+};
 
-//     var uvIndex = document.querySelector(".uv"); 
-//     uvIndex.textContent= "UV Index: " + data.current.uvi;
-// };
 
 //Event delegation !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
