@@ -100,9 +100,10 @@ function appendWeather (c, d) {
     var selectedCity = document.querySelector("#selectedCity");
     selectedCity.textContent =  c;
 
-    // var mainIcon = document.querySelector("#mainIcon");
-    // icon1 = data.current.weather[0].icon
-    // mainIcon.setAttribute("src", icon); 
+    var mainIcon = document.querySelector("#mainIcon");
+    icon1 = d.current.weather[0].icon
+    console.log(icon1);
+    mainIcon.setAttribute("src", `http://openweathermap.org/img/wn/${icon1}@2x.png`); 
 
     var currentTemp = document.querySelector(".temp");
     currentTemp.textContent = "Temp: " + d.current.temp + " F";

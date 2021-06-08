@@ -103,6 +103,9 @@ button:hover {
     height: 216px;
     width: 75%;
     margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(216, 236, 236);
     
 }
 
@@ -112,6 +115,18 @@ button:hover {
 
 .city-details p {
     margin-left: 20px;
+}
+
+/* In case this is the way to go with applying the image */
+.content-flex {
+  justify-content: flex-start;
+
+}
+
+.icon-flex {
+    justify-content: flex-end;
+    margin-left: 65px;
+
 }
 
 .five-day {
