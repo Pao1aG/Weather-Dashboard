@@ -49,8 +49,9 @@ date5.innerHTML = dayAfter3;
 //     })
 
 function getWeatherData (city) {
+    console.log(localStorage.length)
 
-   if (localStorage.citiesArray.length > 0) {
+   if (localStorage.length <= 1) {
        //get city name-----------------
        var storedCity = JSON.parse(localStorage.getItem("citiesArray"));
        city = storedCity[0]
@@ -63,19 +64,19 @@ function getWeatherData (city) {
         console.log(locationUrl);
 
         fetch (locationUrl)
-        .then(function (response) {
-            console.log(response);
-            return response.json();
-        })
-        .then(function (data) {
-        console.log(data);
-        var lat = data.coord.lat; 
-        var lon = data.coord.lon; 
-        console.log(lat,lon); //success
+            .then(function (response) {
+                console.log(response);
+                return response.json();
+            })
+            .then(function (data) {
+            console.log(data);
+            var lat = data.coord.lat; 
+            var lon = data.coord.lon; 
+            console.log(lat,lon); //success
         
             //send second request to retrieve weather data--------------------------
     
-            var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}`
+            var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
     
             fetch(weatherUrl)
             .then(function (response) {
@@ -84,16 +85,56 @@ function getWeatherData (city) {
             })
             .then(function (data) {
                 console.log(data);
+
+                function appendWeather () {
+                    var selectedCity = document.querySelector("#selectedCity");
+                    selectedCity.textContent =  city;
+
+                    // var mainIcon = document.querySelector("#mainIcon");
+                    // icon1 = data.current.weather[0].icon
+                    // mainIcon.setAttribute("src", icon); 
+                
+                    var currentTemp = document.querySelector(".temp");
+                    currentTemp.textContent = "Temp: " + data.current.temp + " F";
+                
+                    var currentWind = document.querySelector(".wind");
+                    currentWind.textContent = "Wind: " + data.current.wind_speed + " mph"; //find why undefined
+                
+                    var humidity = document.querySelector(".hum");
+                    humidity.textContent = "Humidity: " + data.current.humidity + " %";
+                
+                    var uvIndex = document.querySelector(".uv"); 
+                    uvIndex.textContent= "UV Index: " + data.current.uvi;
+                };
+                appendWeather();
             })
+           
         })
+   } else if (localStorage.citiesArray.length > 1){
+        console.log("I will need to make a function that selects the specific city name from the array")
    } else {
-       console.log("I will need to make a function that selects the specific city name from the array")
        return
    };
-   
-
-    
 };
+
+// function appendWeather () {
+//     var selectedCity = document.querySelector("#selectedCity");
+
+//     selectedCity.textContent =  city;
+
+//     var currentTemp = document.querySelector(".temp");
+
+//     currentTemp.textContent = "Temp: " + data.current.temp + "F";
+
+//     var currentWind = document.querySelector(".wind");
+//     currentWind.textContent = "Wind: " + data.current.weather.wind-speed + " mph";
+
+//     var humidity = document.querySelector(".hum");
+//     humidity.textContent = "Humidity: " + data.current.humidity + " %";
+
+//     var uvIndex = document.querySelector(".uv"); 
+//     uvIndex.textContent= "UV Index: " + data.current.uvi;
+// };
 
 //Event delegation !!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
