@@ -19,14 +19,15 @@
         <div class = "search">
             <div class = "nav-block">
                 <h2>Search for a City:</h2>
-                <div class = "search-nav">
-                    <input type = "text" placeholder = "San Diego">
-                </div>
-                <div class = "search-btn">
-                    <button type = "submit">Search</button>
-                </div>
+                <form class = "search">
+                    <input type = "text" placeholder = "City Name, State">
+                    <div class = "search-btn">
+                        <button type = "submit" id= "submitBtn">Search</button>
+                    </div>
+                </form>
             </div>
             <div class= "city-btns">
+                <!--these buttons need to be populated and kept through local storage-->
                 <button type = "button">Phoenix</button>
                 <button type = "button">Austin</button>
                 <button type = "button">Chicago</button>
@@ -42,27 +43,39 @@
         <div class = "city-weather">
             <div class = "city-details">
                 <h2 id = "selectedCity">Selected City Name</h2>
-                <ul class = "temp">Temperature</ul>
-                <ul class = "wind">Wind</ul>
-                <ul class = "hum">Humidity</ul>
-                <ul class = "uv">UV Index</ul>
+                <p class = "temp">Temperature</p>
+                <p class = "wind">Wind</p>
+                <p class = "hum">Humidity</p>
+                <p class = "uv">UV Index</p>
             </div>
             <h2>5-Day Forecast</h2>
             <div class = "five-day">
+                <!--will need to append img-->
+                <!--will need to append temp, wind and humidity as li-->
                 <div>
                     <h3 id = "date-1">00/00/0000</h3>
+                    <img>
+                    <ul></ul>
                 </div>
                 <div>
                     <h3 id = "date-2">00/00/0000</h3>
+                    <img>
+                    <ul></ul>
                 </div>
                 <div>
                     <h3 id = "date-3">00/00/0000</h3>
+                    <img>
+                    <ul></ul>
                 </div>
                 <div>
                     <h3 id = "date-4">00/00/0000</h3>
+                    <img>
+                    <ul></ul>
                 </div>
                 <div>
                     <h3 id = "date-5">00/00/0000</h3>
+                    <img>
+                    <ul></ul>
                 </div>
 
             </div>

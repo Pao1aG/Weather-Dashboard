@@ -50,7 +50,7 @@ main {
     border-bottom: 2px solid black;
 }
 
-.search-nav input {
+.search input {
     width: 200px;
     height: 26px;
     border-radius: 4px;
@@ -108,6 +108,10 @@ button:hover {
 
 .city-details h2 {
     margin-left: 28px;
+}
+
+.city-details p {
+    margin-left: 20px;
 }
 
 .five-day {
