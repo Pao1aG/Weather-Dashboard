@@ -33,7 +33,7 @@ function getWeatherData (city) {
     var localArray = JSON.parse(localStorage.getItem("citiesArray"));
 
     //This is for the first city submit
-   if (localArray.length <= 1) {
+   if (localArray.length >= 1) {
        //get city name-----------------
        var storedCity = JSON.parse(localStorage.getItem("citiesArray"));
        city = storedCity[0]
@@ -80,21 +80,18 @@ function getWeatherData (city) {
 
 
     //This is for 2nd+ city submission
-   } else if (localArray.length > 1){
-        console.log("I will need to make a function that selects the specific city name from the array")
+//    } else if (localArray.length > 1){
+//         console.log("Getting data from long array");
+
         
-        // //store new entry in local storage
-        // var storedCities = JSON.parse(localStorage.getItem("citiesArray"));
-        // for (let index = 0; index < storedCities.length; index++) {
-        //     var cityList = storedCity[index]
-        //     console.log(cityList);
-        // }
-   } else {
-       return
+//    } else {
+//        return
    };
 };
 
 function appendWeather (c, d) {
+    //Need to add condition if entry has been made to clear appends first
+
     //APPEND WEATHER FOR CITY-DETAILS
     var selectedCity = document.querySelector("#selectedCity");
     selectedCity.textContent =  c + " -- " + today;
@@ -164,10 +161,6 @@ function appendWeather (c, d) {
 
         fiveDay.append(tempLi);
     };
-
-
-
-    
 };
 
 
@@ -203,6 +196,7 @@ searchForm.addEventListener("submit", function(e) {
     //Upper case first letter, syntax found on t.ly/Ld2x
     cityName = inputValue.charAt(0).toUpperCase() + inputValue.slice(1); 
     console.log(cityName);//success
+
    
     //store the city in our search history
     if (cityName.length < 1) {
@@ -213,23 +207,25 @@ searchForm.addEventListener("submit", function(e) {
         
         console.log("saving new city in array");
         citiesArray.push(cityName);
-        localStorage.setItem("citiesArray", JSON.stringify(citiesArray));
-        
-        var localArray = JSON.parse(localStorage.getItem("citiesArray"));//get what is already in local
-        console.log(localArray.length);
-        console.log(localArray);
-        
-        if (localStorage.localArray != null) {
-            console.log("it is saving more than 1")
+       
+         
+        if (localStorage.citiesArray != null) {
+            var localArray = JSON.parse(localStorage.getItem("citiesArray"));//get what is already in local
+            console.log(localArray.length);
+            console.log(localArray);
             
-            var citiesArray = [];
+            console.log("it is saving more than 1")
             
             for (let index = 0; index < localArray.length; index++) {
                 citiesArray.push(localArray[index]); //push each individual name into the array
             }
             
+            console.log(citiesArray);
             localStorage.setItem("citiesArray", JSON.stringify(citiesArray)); //save all names in local storage
-        };
+        
+        } else {
+            localStorage.setItem("citiesArray", JSON.stringify(citiesArray));
+        }
     };
     //get weather data
     getWeatherData(cityName);
