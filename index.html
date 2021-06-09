@@ -20,7 +20,7 @@
             <div class = "nav-block">
                 <h2>Search for a City:</h2>
                 <form class = "search">
-                    <input type = "text" placeholder = "City Name, State">
+                    <input type = "text" placeholder = "City Name" id="inputText">
                     <div class = "search-btn">
                         <button type = "submit" id= "submitBtn">Search</button>
                     </div>
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class = "city-weather">
+        <div class = "city-weather hide">
             <div class = "city-details">
                 <div class = "content-flex">
                     <h2 id = "selectedCity">Selected City Name  </h2>
@@ -49,30 +49,30 @@
             <div class = "five-day">
                 <!--will need to append img-->
                 <!--will need to append temp, wind and humidity as li-->
-                <div>
+                <div id = "day1Div">
                     <h3 id = "date-1">00/00/0000</h3>
                     <img>
-                    <ul></ul>
+                    <ul id ="day0"></ul>
                 </div>
-                <div>
+                <div id = "day2Div">
                     <h3 id = "date-2">00/00/0000</h3>
                     <img>
-                    <ul></ul>
+                    <ul id ="day1"></ul>
                 </div>
-                <div>
+                <div id = "day3Div">
                     <h3 id = "date-3">00/00/0000</h3>
                     <img>
-                    <ul></ul>
+                    <ul id = "day2"></ul>
                 </div>
-                <div>
+                <div id = "day4Div">
                     <h3 id = "date-4">00/00/0000</h3>
                     <img>
-                    <ul></ul>
+                    <ul id = "day3"></ul>
                 </div>
-                <div>
+                <div id = "day5Div">
                     <h3 id = "date-5">00/00/0000</h3>
-                    <img>
-                    <ul></ul>
+                    <img >
+                    <ul id = "day4"></ul>
                 </div>
 
             </div>
@@ -80,8 +80,6 @@
 
     </main>
    
-
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src = "./assets/script/script.js"></script>
 </body>

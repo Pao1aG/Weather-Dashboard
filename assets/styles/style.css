@@ -14,6 +14,14 @@ body {
     margin: auto;
 }
 
+.hide {
+    display:none;
+}
+
+.reveal {
+    display:block;
+}
+
 h1 {
     font-size: 2rem;
 }
@@ -63,7 +71,7 @@ button:hover {
 
 .search-btn button {
     align-items: center;
-    background-color: rgb(75, 75, 201);
+    background-color: rgb(45, 45, 97);
     color: white;
     width: 200px;
     height: 26px;
@@ -100,12 +108,14 @@ button:hover {
 
 .city-details {
     border: 2px solid black;
+    border-radius: 4px;
     height: 216px;
-    width: 75%;
+    width: 95%;
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(216, 236, 236);
+    background-color: rgb(144, 201, 207);
+    font-weight: bold;
     
 }
 
@@ -142,18 +152,28 @@ button:hover {
     text-align: left;
 }
 
-#date-1, 
-#date-2, 
-#date-3,
-#date-4, 
-#date-5 {
-    /* display: flex;
-    flex-direction: column;
-    flex: wrap; */
+#day1Div, 
+#day2Div, 
+#day3Div,
+#day4Div, 
+#day5Div {
     background-color: rgb(34, 34, 80);
     color: white;
     margin: 0.7rem;
     padding: 1rem;
     width: 9rem;
     height: 14rem;
+    border: 1px dashed rgb(83, 80, 80);
+    border-radius: 4px;
+}
+
+#day0,
+#day1,
+#day2,
+#day3,
+#day4 {
+    list-style-type: none;
+    margin-left: -40px;
+    line-height: 2.5;
+    margin-top:-10px;
 }
