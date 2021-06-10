@@ -7,6 +7,7 @@ var date4 = document.querySelector("#date-4");
 var date5 = document.querySelector("#date-5");
 
 var displayCity = document.querySelector(".city-weather");
+var display5day = document.querySelector(".five-day");
 
 //Moment.js for Dates----------------------------------
 var today = moment().format("MM/DD/YYYY");
@@ -54,7 +55,22 @@ function getWeatherData (city) {
         fetch (locationUrl)
             .then(function (response) {
                 console.log(response);
-                return response.json();
+                if(response.status == 404) {
+                    console.log("this is where you delete things")
+                    window.alert("Please enter a valid city");
+
+                    var appendedBtn = document.getElementById(`"${city}"`);
+                    appendedBtn.remove();//removes recent button
+
+                    storedCity.shift();
+                    localStorage.setItem("citiesArray", JSON.stringify(storedCity)); //deletes new 'city' from local storage
+
+                    location.reload();
+    
+                } else {
+                    return response.json();
+                }
+               
             })
             .then(function (data) {
             console.log(data);
@@ -76,21 +92,16 @@ function getWeatherData (city) {
                 appendWeather(city, data);
             })
            
-        });
-
-
-    //This is for 2nd+ city submission
-//    } else if (localArray.length > 1){
-//         console.log("Getting data from long array");
-
-        
-//    } else {
-//        return
+            });
+   } else {
+       return;
    };
 };
 
 function appendWeather (c, d) {
     //Need to add condition if entry has been made to clear appends first
+    // displayCity.clear();
+    // display5day.clear();
 
     //APPEND WEATHER FOR CITY-DETAILS
     var selectedCity = document.querySelector("#selectedCity");
@@ -115,15 +126,18 @@ function appendWeather (c, d) {
     //APPEND WEATHER FOR FIVE-DAY
 
     //ICON
+    
     for (let index = 0; index < 5; index++) {
         var day = "#day" + [index]; 
         var fiveDay = document.querySelector(day);
-        
+
         var tempImg = document.createElement("img"); //create 1 img element
         icon2 = d.daily[index].weather[0].icon;
         console.log(icon2);
         tempImg.setAttribute("src", `http://openweathermap.org/img/wn/${icon2}@2x.png`);
         tempImg.setAttribute("style", "height:42px")
+
+        fiveDay.innerHTML= "";
 
         fiveDay.append(tempImg);
     };
