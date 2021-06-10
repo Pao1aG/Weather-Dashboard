@@ -112,7 +112,7 @@ button:hover {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(197, 231, 235);
+    background-image: linear-gradient(to right, rgb(122, 189, 228), rgb(126, 225, 236));
     font-weight: bold;
     
 }
