@@ -98,9 +98,13 @@ function getWeatherData (cityName) {
 };
 
 function appendWeather (c, d) {
+    //Reveal divs
+    mode = "reveal"
+    displayCity.setAttribute("class", mode);
+
     //APPEND WEATHER FOR CITY-DETAILS
     var selectedCity = document.querySelector("#selectedCity");
-    selectedCity.textContent =  c + " -- " + today;
+    selectedCity.textContent =  c + "  |  " + today;
 
     var mainIcon = document.querySelector("#mainIcon");
     icon1 = d.current.weather[0].icon
@@ -212,6 +216,8 @@ function identifyButton (cityBtn) {
         .then(function (data) {
             console.log(data);
             appendWeather(cityName, data);
+
+
         })
         });
     });
@@ -228,6 +234,7 @@ searchForm.addEventListener("submit", function(e) {
     var inputText = document.querySelector("input[type=text]").value;
     console.log(inputText);
     inputText.innerHTML= "";
+
     //Reveal divs
     mode = "reveal"
     displayCity.setAttribute("class", mode);
@@ -274,8 +281,6 @@ window.addEventListener("load", function(event) {
     event.preventDefault();
 
     if(localStorage.citiesArray != null) {
-        console.log("there are cities in the array"); //success
-
         var citiesArray = JSON.parse(localStorage.getItem("citiesArray"));
 
         citiesArray.forEach(function (item, index) {
@@ -284,8 +289,13 @@ window.addEventListener("load", function(event) {
             var buttonsDiv = document.querySelector(".city-btns");
             var cityBtn = document.createElement("button");
             cityBtn.innerHTML = citiesArray[index];
-            cityBtn.setAttribute("id", citiesArray[index]);
-            buttonsDiv.append(cityBtn); 
+            cityBtn.setAttribute("id", `"${citiesArray[index]}"`);
+            console.log(cityBtn.getAttribute("id"));
+            buttonsDiv.append(cityBtn);  
+            identifyButton(cityBtn);
         })
-    }
-})
+    } else {
+        var buttonsDiv = document.querySelector(".city-btns");
+        removeAllChildNodes(buttonsDiv);
+    };
+});

@@ -1,5 +1,6 @@
 html {
   margin-top: -14px;
+  background-color: rgb(234, 230, 247);
 }
 
 body {
@@ -67,7 +68,7 @@ button:hover {
 
 .search-btn button {
     align-items: center;
-    background-color: rgb(45, 45, 97);
+    background-color: rgb(72, 72, 141);
     color: white;
     width: 200px;
     height: 26px;
@@ -111,7 +112,7 @@ button:hover {
     margin-top: 10px;
     display: flex;
     flex-direction: row;
-    background-color: rgb(144, 201, 207);
+    background-color: rgb(197, 231, 235);
     font-weight: bold;
     
 }
