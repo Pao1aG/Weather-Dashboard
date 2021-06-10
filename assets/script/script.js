@@ -268,3 +268,24 @@ searchForm.addEventListener("submit", function(e) {
     //get weather data
     getWeatherData(cityName);
 }); 
+
+//Function to append everything back upon window reload
+window.addEventListener("load", function(event) {
+    event.preventDefault();
+
+    if(localStorage.citiesArray != null) {
+        console.log("there are cities in the array"); //success
+
+        var citiesArray = JSON.parse(localStorage.getItem("citiesArray"));
+
+        citiesArray.forEach(function (item, index) {
+            console.log("These are the cities at " + [index] + " and their names are " + citiesArray[index] )
+
+            var buttonsDiv = document.querySelector(".city-btns");
+            var cityBtn = document.createElement("button");
+            cityBtn.innerHTML = citiesArray[index];
+            cityBtn.setAttribute("id", citiesArray[index]);
+            buttonsDiv.append(cityBtn); 
+        })
+    }
+})
