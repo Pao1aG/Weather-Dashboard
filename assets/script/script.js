@@ -7,7 +7,6 @@ var date4 = document.querySelector("#date-4");
 var date5 = document.querySelector("#date-5");
 
 var displayCity = document.querySelector(".city-weather");
-var display5day = document.querySelector(".five-day");
 
 //Moment.js for Dates----------------------------------
 var today = moment().format("MM/DD/YYYY");
@@ -30,22 +29,23 @@ date5.innerHTML = dayAfter3;
 
 
 //Function for getting weather data from API------------------------------------
-function getWeatherData (city) {
+function getWeatherData (cityName) {
     var localArray = JSON.parse(localStorage.getItem("citiesArray"));
 
     //This is for the first city submit
    if (localArray.length >= 1) {
        //get city name-----------------
        var storedCity = JSON.parse(localStorage.getItem("citiesArray"));
-       city = storedCity[0]
-       console.log(city);//success
+       var city = storedCity[0];
 
        //create city button
        var buttonsDiv = document.querySelector(".city-btns");
        var cityBtn = document.createElement("button");
        cityBtn.innerHTML = `${city}`;
        cityBtn.setAttribute("id", `"${city}"`);
+       console.log(cityBtn.getAttribute("id"));
        buttonsDiv.append(cityBtn); 
+       identifyButton(cityBtn);
        
        //get its lat and lan--------------------------
         var apiKey = "72a52a72e7a14c1a47a69d46ea5e7322" //this is from my account with OpenWeather
@@ -56,7 +56,6 @@ function getWeatherData (city) {
             .then(function (response) {
                 console.log(response);
                 if(response.status == 404) {
-                    console.log("this is where you delete things")
                     window.alert("Please enter a valid city");
 
                     var appendedBtn = document.getElementById(`"${city}"`);
@@ -99,10 +98,6 @@ function getWeatherData (city) {
 };
 
 function appendWeather (c, d) {
-    //Need to add condition if entry has been made to clear appends first
-    // displayCity.clear();
-    // display5day.clear();
-
     //APPEND WEATHER FOR CITY-DETAILS
     var selectedCity = document.querySelector("#selectedCity");
     selectedCity.textContent =  c + " -- " + today;
@@ -126,14 +121,12 @@ function appendWeather (c, d) {
     //APPEND WEATHER FOR FIVE-DAY
 
     //ICON
-    
     for (let index = 0; index < 5; index++) {
         var day = "#day" + [index]; 
         var fiveDay = document.querySelector(day);
 
         var tempImg = document.createElement("img"); //create 1 img element
         icon2 = d.daily[index].weather[0].icon;
-        console.log(icon2);
         tempImg.setAttribute("src", `http://openweathermap.org/img/wn/${icon2}@2x.png`);
         tempImg.setAttribute("style", "height:42px")
 
@@ -141,7 +134,6 @@ function appendWeather (c, d) {
 
         fiveDay.append(tempImg);
     };
-
 
     //TEMP
     for (let index = 0; index < 5; index++) {
@@ -178,20 +170,52 @@ function appendWeather (c, d) {
 };
 
 
-//Event delegation !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//Event delegation---------------------------
 
-var buttonContainer = document.querySelector(".city-btns");
+function identifyButton (cityBtn) {
+    cityBtn.addEventListener("click", function (e) {
+        //Make sure that it is a button that was clicked
+        console.log(this.getAttribute("id"));
 
-buttonContainer.addEventListener("click", function (e) {
-    //Make sure that it is a button that was clicked
+        //Get city name from button element
+        var cityId = this.getAttribute("id");
+        capitalizeCity = cityId.charAt(0).toUpperCase() + cityId.slice(1); 
+        var cityName = capitalizeCity.replace(/"/g,""); //syntax found on t.ly/40Q6
+        console.log(cityName);
 
+        //Get weather data
+        var apiKey = "72a52a72e7a14c1a47a69d46ea5e7322" //this is from my account with OpenWeather
 
-    //Get city name from button element
+        var locationUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`
+        console.log(locationUrl);
 
+        fetch (locationUrl)
+        .then(function (response) {
+        return response.json();
+        })
 
-    //Get weather data
-    // getWeatherData(cityName);
-})
+        .then(function (data) {
+            console.log(data);
+            var lat = data.coord.lat; 
+            var lon = data.coord.lon; 
+            console.log(lat,lon); //success
+                
+        //send second request to retrieve weather data--------------------------
+            
+        var weatherUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`
+            
+        fetch(weatherUrl)
+        .then(function (response) {
+            console.log(response)
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+            appendWeather(cityName, data);
+        })
+        });
+    });
+};
 
 
 //Listen for submit event on form 
@@ -199,11 +223,14 @@ var searchForm = document.querySelector(".search");
 
 searchForm.addEventListener("submit", function(e) {
     e.preventDefault();
-
+    
+    //Clear text from input
+    var inputText = document.querySelector("input[type=text]").value;
+    console.log(inputText);
+    inputText.innerHTML= "";
     //Reveal divs
     mode = "reveal"
     displayCity.setAttribute("class", mode);
-    console.log("divs are revealed");
 
     //get the city from input
     inputValue = document.querySelector("input").value.trim();
@@ -219,7 +246,6 @@ searchForm.addEventListener("submit", function(e) {
         
         var citiesArray = [];
         
-        console.log("saving new city in array");
         citiesArray.push(cityName);
        
          
@@ -227,8 +253,6 @@ searchForm.addEventListener("submit", function(e) {
             var localArray = JSON.parse(localStorage.getItem("citiesArray"));//get what is already in local
             console.log(localArray.length);
             console.log(localArray);
-            
-            console.log("it is saving more than 1")
             
             for (let index = 0; index < localArray.length; index++) {
                 citiesArray.push(localArray[index]); //push each individual name into the array
@@ -243,5 +267,4 @@ searchForm.addEventListener("submit", function(e) {
     };
     //get weather data
     getWeatherData(cityName);
-    
 }); 
