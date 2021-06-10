@@ -97,6 +97,11 @@ button:hover {
     font-weight: bold;
 }
 
+.city-btns .clear {
+    background-color: rgb(212, 211, 209);
+    color: black;
+}
+
 .city-weather {
     justify-content: flex-end;
     flex-basis: 80%;

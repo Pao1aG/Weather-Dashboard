@@ -216,24 +216,16 @@ function identifyButton (cityBtn) {
         .then(function (data) {
             console.log(data);
             appendWeather(cityName, data);
-
-
         })
         });
     });
 };
-
 
 //Listen for submit event on form 
 var searchForm = document.querySelector(".search");
 
 searchForm.addEventListener("submit", function(e) {
     e.preventDefault();
-    
-    //Clear text from input
-    var inputText = document.querySelector("input[type=text]").value;
-    console.log(inputText);
-    inputText.innerHTML= "";
 
     //Reveal divs
     mode = "reveal"
@@ -269,9 +261,14 @@ searchForm.addEventListener("submit", function(e) {
             localStorage.setItem("citiesArray", JSON.stringify(citiesArray)); //save all names in local storage
         
         } else {
-            localStorage.setItem("citiesArray", JSON.stringify(citiesArray));
+            localStorage.setItem("citiesArray", JSON.stringify(citiesArray)); //placing the first cityname in local storage
         }
+
     };
+    //  Clear text from input
+    var clearInput = inputValue.textContent = "";
+    console.log(clearInput);
+
     //get weather data
     getWeatherData(cityName);
 }); 
@@ -284,7 +281,7 @@ window.addEventListener("load", function(event) {
         var citiesArray = JSON.parse(localStorage.getItem("citiesArray"));
 
         citiesArray.forEach(function (item, index) {
-            console.log("These are the cities at " + [index] + " and their names are " + citiesArray[index] )
+            // console.log("These are the cities at " + [index] + " and their names are " + citiesArray[index] )
 
             var buttonsDiv = document.querySelector(".city-btns");
             var cityBtn = document.createElement("button");
@@ -299,3 +296,16 @@ window.addEventListener("load", function(event) {
         removeAllChildNodes(buttonsDiv);
     };
 });
+
+//event listener for Clear Searches button
+var clearBtn = document.querySelector(".clear");
+clearBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    if(this.getAttribute("class") == "clear") {
+        console.log("I can clear this")
+        localStorage.clear();
+        location.reload();
+    };
+
+})
