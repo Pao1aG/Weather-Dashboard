@@ -266,8 +266,7 @@ searchForm.addEventListener("submit", function(e) {
 
     };
     //  Clear text from input
-    var clearInput = inputValue.textContent = "";
-    console.log(clearInput);
+    document.querySelector("input").value = "";
 
     //get weather data
     getWeatherData(cityName);
@@ -287,7 +286,7 @@ window.addEventListener("load", function(event) {
             var cityBtn = document.createElement("button");
             cityBtn.innerHTML = citiesArray[index];
             cityBtn.setAttribute("id", `"${citiesArray[index]}"`);
-            console.log(cityBtn.getAttribute("id"));
+            //console.log(cityBtn.getAttribute("id"));
             buttonsDiv.append(cityBtn);  
             identifyButton(cityBtn);
         })
