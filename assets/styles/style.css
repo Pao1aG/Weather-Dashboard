@@ -160,7 +160,7 @@ button:hover {
 #day3Div,
 #day4Div, 
 #day5Div {
-    background-color: rgb(34, 34, 80);
+    background-image: linear-gradient(to left, rgb(82, 82, 170) ,rgb(34, 34, 80));
     color: white;
     margin: 0.7rem;
     padding: 1rem;
