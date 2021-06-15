@@ -5,6 +5,7 @@
 * Description
 * Usage
 * Images
+* License
 
 
 ## Description
@@ -24,3 +25,7 @@ This web application can be used to look up the weather information of major cit
 ## Images
 
 ![Screenshot of Weather Dashboard](assets/images/weatherDashboard_screenshot.png)
+
+## License
+
+This project is licensed under MIT License.
